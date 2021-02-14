@@ -1,9 +1,37 @@
 
+#' Calculate moonlight intensity
+#'
+#'This function is predicting moonlight intensity on the ground for any given place and time,
+#'based on the location, position of the moon and number of correction factors
+#'
+#' @import suncalc
+#' @import stats
+#' @import graphics
+#'
+#' @param lat
+#' @param lon
+#' @param date
+#' @param e
+#'
+#' @return
+#' @export
+#'
+#' @examples
+#'
+#'
+#'
+#'
+#'
+#'
+
+#library(suncalc)
+#library(stats)
+#library(graphics)
+
 calculateMoonlightIntensity <- function(lat, lon, date, e)
 
 
 {
-
 
 
 
@@ -16,7 +44,7 @@ calculateMoonlightIntensity <- function(lat, lon, date, e)
 
 
   #suncalc library is needed to calculate sun and moon positions
-  library(suncalc)
+  #library(suncalc)
 
 
 
@@ -25,10 +53,10 @@ calculateMoonlightIntensity <- function(lat, lon, date, e)
 
 
   #calculating values using suncalc library
-  moonPosition <- getMoonPosition(data = d1)
-  moonIllum <- getMoonIllumination(date = date)
+  moonPosition <- suncalc::getMoonPosition(data = d1)
+  moonIllum <- suncalc::getMoonIllumination(date = date)
   phaseAngle <- acos((2*moonIllum$fraction)-1)
-  sunPosition <- getSunlightPosition(data = d1)
+  sunPosition <- suncalc::getSunlightPosition(data = d1)
 
 
 
@@ -137,7 +165,7 @@ phaseBrightness <- c(0.981495601,0.957317682,0.93441936,0.911719223,0.887147319,
 
 
 #spline interpolation function
-brightness <- splinefun(discIlluminated, phaseBrightness, method = "fmm", ties = mean)
+brightness <- stats::splinefun(discIlluminated, phaseBrightness, method = "fmm", ties = mean)
 
 #correction factor for model
 night$phaseEffect <- brightness(night$moonIllum)

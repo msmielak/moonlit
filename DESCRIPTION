@@ -1,16 +1,23 @@
 Package: moonlit
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
-Authors@R: 
-    person(given = "First",
-           family = "Last",
-           role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to
-    pick a license
+Type: Package
+Title: Predicting moonlight intensity on the ground for a given place and time
+Version: 0.1
+Authors@R: person(
+  "Michal", "Smielak",
+  email = "michalsmielak@gmail.com",
+  role = c("aut", "cre")
+  )
+Maintainer: Michal Smielak <michalsmielak@gmail.com>
+Description: Predicting moonlight intensity on the ground, based on the position of the moon in the sky and a number of correction factors.
+License: GPL-3
 Encoding: UTF-8
 LazyData: true
-Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
+Depends: 
+    R (>= 3.4.2),
+    suncalc (>= 0.5.0),
+    graphics,
+    stats
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
