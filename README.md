@@ -23,7 +23,7 @@ __This is an early release and functionalities might change. This package is cur
 
 - [x] Predicting moonlight intensity on the ground for any given place and time
 - [x] Predicting twilight illumination levels 
-- [x] Calculating nightly mean illumianation levels for a given location - this is actually a bit tricky because you need to calculate it for each night, and not for each day. Needs including into the repository as a separate function
+- [x] Calculating nightly mean illumianation levels for a given location - this is actually a bit tricky because you need to calculate it for each night, and not for each day.
 
 
 
@@ -74,22 +74,24 @@ It will also conveniently plot predicted values as points and moon phase as line
 
 #### calculateMoonlightStatistics()
 ```R
-calculateMoonlightStatistics(lat, lon, date, e, t, timezone)
+calculateMoonlightStatistics(date, lat, lon, t, e, timezone)
 ```
 
 This function calculates **nightly** statistics for moonlight illumination and moon phase.
-For each date-time record it will assing min, max and mean values for a night. For daily records, the **nearest** night is assigned, so for records before noon it returns statistics for the night that starts on the previous day, and for records after noon it assigns statistics for the night that starts on this day.
+
+For each record it will assing min, max and mean values for the night. For diurnal records, the **nearest** night is assigned, so for records before noon it returns statistics for the night that starts on the previous day, and for records after noon it assigns statistics for the night that starts on this day.
 
 Function requires as an input a matrix of values for location and date, local time zone and a value of extinction coefficient *e*.  
 Accepted formats: 
 
+* date - date time as POSIXct with the local time zone. If needed use as.POSIXct(date, tz=timezone)
+* lat - latitude, numerical decimal
+* lon - longitude, numerical decimal
 * t - sampling interval -  15 minutes is more than enough, can go down to 1 hour for large datasets to save time.
 It is used in seq() function so the same values are accepted: A character string, containing one of "sec", "min", "hour". This can optionally be preceded by a (positive or negative) integer and a space, or followed by "s". Example: "15 mins", "1 hour" etc.
 * e - extinction coefficient - the same as the main function, for instance, 0.26
 * timezone - time zone of the data - usually in the format "Continent/City", i.e. for Poland: "Europe/Warsaw"
-* date - date time as POSIXct with the local time zone. If needed use as.POSIXct(date, tz=timezone)
-* lat - latitude, numerical decimal
-* lon - longitude, numerical decimal
+
 
 Function returns a data frame with following columns:
 
