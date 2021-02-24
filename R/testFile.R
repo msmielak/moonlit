@@ -1,10 +1,21 @@
 
 #Testing function
 
+t           # interval for sample values -  "15 mins"  is more than enough, can go down to "1 hour" probably for speed
+e           # extinction coefficient - the same as the main function, for instance, 0.26
+timezone    # time zone of the data - usually in the format "Continent/City", i.e. for Poland: "Europe/Warsaw"
+date        # date time as POSIXct with the local time zone. If needed use as.POSIXct(date, tz=timezone)
+lat         # latitude, numerical decimal
+lon         # longitude, numerical decimal
+
+
+
+
+
 #input values for testing
-t <- "15 mins"
-e <- 0.26
-timezone <- "Australia/Brisbane"
+t <- "15 mins" 
+e <- 0.26      
+timezone <- "Australia/Brisbane"   
 date <- as.POSIXct(alldetections$date, tz=timezone)
 lat <- alldetections$lat
 lon <- alldetections$lon
