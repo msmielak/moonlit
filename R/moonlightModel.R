@@ -268,7 +268,7 @@ night$illumination <- night$illuminationModel*0.32 + night$twilightModel
 
 
 #generating output data frame
-
+#d1$sunPosition <- night$sunAlt
 d1$night <- night$night
 d1$moonlightModel <- night$moonlightModel
 d1$twilightModel <- night$twilightModel
@@ -286,8 +286,8 @@ d1$moonPhase <- night$moonIllum
 #test plot
 
 night<- night[order(date),]
-plot(night$date, night$moonIllum, type = "l")
-points(night$date, night$illuminationModel)
+plot(night$date, night$moonlightModel, type = "l")
+#points(night$date, night$illuminationModel)
 
 
 return(d1)
