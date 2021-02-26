@@ -287,7 +287,7 @@ d1$moonPhase <- night$moonIllum
 
 night<- night[order(date),]
 plot(night$date, night$moonlightModel, type = "l")
-#points(night$date, night$illuminationModel)
+points(night$date, night$illuminationModel)
 
 
 return(d1)
