@@ -72,6 +72,8 @@ Function returns a data frame with following columns:
 
 It will also conveniently plot predicted values as points and moon phase as line, allowing for quick visual comparison of the two measures.
 
+**Caution -  currently it assigns 0 when sun is above the horizon, even if the moon is visible. Normally, this is not a problem, becasue when sun is visible, moonlight is negligible, but it is worth keeping that in mind. I might change that at some point as there is a "night" field so users can filter out night-only records on their own.**
+
 #### calculateMoonlightStatistics()
 ```R
 calculateMoonlightStatistics(date, lat, lon, t, e, timezone)
