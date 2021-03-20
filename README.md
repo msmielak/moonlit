@@ -67,6 +67,7 @@ Accepted formats:
 Function returns a data frame with following columns:
 
 * **night** - a logical value, true when sun below the horizon for given date and location
+* **sunAltDegrees** - solar altitude in degrees; this can be used to subset "true" night observations
 * **moonlightModel** - predicted moonlight illumination, relative to an "average" full moon
 * **twilightModel** - predicted twilight illumination in lx; this is a crude approximation based solely on the position of the sun, so use with caution.
 * **illumination** - combined moon and twilight intensity, in lx. Moonlight converted to lx based on average full moon value of 0.32 lx.
