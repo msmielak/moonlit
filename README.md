@@ -94,7 +94,7 @@ Accepted formats:
 * lat - latitude, numerical decimal
 * lon - longitude, numerical decimal
 * t - sampling interval -  15 minutes is more than enough, can go down to 1 hour for large datasets to save time.
-It is used in seq() function so the same values are accepted: A character string, containing one of "sec", "min", "hour". This can optionally be preceded by a (positive or negative) integer and a space, or followed by "s". Example: "15 mins", "1 hour" etc.
+It is used in seq() function so the same values are accepted: A character string, containing one of "sec", "min", "hour". This can optionally be preceded by a (positive or negative) integer and a space, or followed by "s". Example: "15 mins", "3 hour" etc.
 * e - extinction coefficient - the same as the main function, for instance, 0.26
 * timezone - time zone of the data - usually in the format "Continent/City", i.e. for Poland: "Europe/Warsaw"
 
