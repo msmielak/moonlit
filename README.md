@@ -90,12 +90,12 @@ For each record it will assing min, max and mean values for the night. For diurn
 Function requires as an input a matrix of values for location and date, local time zone and a value of extinction coefficient *e*.  
 Accepted formats: 
 
-* date - date time as POSIXct with the local time zone. If needed use as.POSIXct(date, tz=timezone)
 * lat - latitude, numerical decimal
 * lon - longitude, numerical decimal
+* date - date time as POSIXct with the local time zone. If needed use as.POSIXct(date, tz=timezone)
+* e - extinction coefficient - the same as the main function, for instance, 0.26
 * t - sampling interval -  15 minutes is more than enough, can go down to 1 hour for large datasets to save time.
 It is used in seq() function so the same values are accepted: A character string, containing one of "sec", "min", "hour". This can optionally be preceded by a (positive or negative) integer and a space, or followed by "s". Example: "15 mins", "3 hour" etc.
-* e - extinction coefficient - the same as the main function, for instance, 0.26
 * timezone - time zone of the data - usually in the format "Continent/City", i.e. for Poland: "Europe/Warsaw"
 
 
