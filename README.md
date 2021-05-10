@@ -104,9 +104,8 @@ Function returns a data frame with following columns:
 * **date, lat, lon** - the same as the input
 
 * **meanMoonlightIntensity** - mean value of modelled illumination for the night
-* **minnMoonlightIntensity** - min value of modelled illumination for the night
+* **minMoonlightIntensity** - min value of modelled illumination for the night
 * **maxMoonlightIntensity** - max value of modelled illumination for the night
-
 * **meanMoonPhase** - mean value of moon phase (% of moon illuminated)
 * **minMoonPhase** - min value of moon phase (% of moon illuminated)
 * **maxMoonPhase** - max value of moon phase (% of moon illuminated)
