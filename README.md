@@ -80,7 +80,7 @@ It will also conveniently plot predicted values as points and moon phase as line
 ---
 #### calculateMoonlightStatistics()
 ```R
-calculateMoonlightStatistics(lat, lon, date, t, e, timezone)
+calculateMoonlightStatistics(lat, lon, date, e, t, timezone)
 ```
 
 This function calculates **nightly** statistics for moonlight illumination and moon phase.
