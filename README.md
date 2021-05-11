@@ -23,8 +23,7 @@ __This is an early release and functionalities might change. This package is cur
 
 - [x] Predicting moonlight intensity on the ground for any given place and time
 - [x] Predicting twilight illumination levels 
-- [x] Calculating nightly mean illumianation levels for a given location - this is actually a bit tricky because you need to calculate it for each night, and not for each day.
-
+- [x] Calculating nightly mean illumianation levels for a given location
 
 
 
