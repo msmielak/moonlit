@@ -23,8 +23,7 @@ __This is an early release and functionalities might change. This package is cur
 
 - [x] Predicting moonlight intensity on the ground for any given place and time
 - [x] Predicting twilight illumination levels 
-- [x] Calculating nightly mean illumianation levels for a given location - this is actually a bit tricky because you need to calculate it for each night, and not for each day.
-
+- [x] Calculating nightly mean illumianation levels for a given location
 
 
 
@@ -45,6 +44,8 @@ library(moonlit)
 ```
 
 ### Functions
+---
+
 #### calculateMoonlightIntensity()
 
 
@@ -65,6 +66,7 @@ Accepted formats:
 Function returns a data frame with following columns:
 
 * **night** - a logical value, true when sun below the horizon for given date and location
+* **sunAltDegrees** - solar altitude in degrees; this can be used to subset "true" night observations
 * **moonlightModel** - predicted moonlight illumination, relative to an "average" full moon
 * **twilightModel** - predicted twilight illumination in lx; this is a crude approximation based solely on the position of the sun, so use with caution.
 * **illumination** - combined moon and twilight intensity, in lx. Moonlight converted to lx based on average full moon value of 0.32 lx.
@@ -72,9 +74,12 @@ Function returns a data frame with following columns:
 
 It will also conveniently plot predicted values as points and moon phase as line, allowing for quick visual comparison of the two measures.
 
+**Caution -  currently it assigns 0 when sun is above the horizon, even if the moon is visible. Normally, this is not a problem, becasue when sun is visible, moonlight is negligible, but it is worth keeping that in mind. I might change that at some point as there is a "night" field so users can filter out night-only records on their own.**
+
+---
 #### calculateMoonlightStatistics()
 ```R
-calculateMoonlightStatistics(date, lat, lon, t, e, timezone)
+calculateMoonlightStatistics(lat, lon, date, e, t, timezone)
 ```
 
 This function calculates **nightly** statistics for moonlight illumination and moon phase.
@@ -84,12 +89,12 @@ For each record it will assing min, max and mean values for the night. For diurn
 Function requires as an input a matrix of values for location and date, local time zone and a value of extinction coefficient *e*.  
 Accepted formats: 
 
-* date - date time as POSIXct with the local time zone. If needed use as.POSIXct(date, tz=timezone)
 * lat - latitude, numerical decimal
 * lon - longitude, numerical decimal
-* t - sampling interval -  15 minutes is more than enough, can go down to 1 hour for large datasets to save time.
-It is used in seq() function so the same values are accepted: A character string, containing one of "sec", "min", "hour". This can optionally be preceded by a (positive or negative) integer and a space, or followed by "s". Example: "15 mins", "1 hour" etc.
+* date - date time as POSIXct with the local time zone. If needed use as.POSIXct(date, tz=timezone)
 * e - extinction coefficient - the same as the main function, for instance, 0.26
+* t - sampling interval -  15 minutes is more than enough, can go down to 1 hour for large datasets to save time.
+It is used in seq() function so the same values are accepted: A character string, containing one of "sec", "min", "hour". This can optionally be preceded by a (positive or negative) integer and a space, or followed by "s". Example: "15 mins", "3 hour" etc.
 * timezone - time zone of the data - usually in the format "Continent/City", i.e. for Poland: "Europe/Warsaw"
 
 
@@ -98,9 +103,8 @@ Function returns a data frame with following columns:
 * **date, lat, lon** - the same as the input
 
 * **meanMoonlightIntensity** - mean value of modelled illumination for the night
-* **minnMoonlightIntensity** - min value of modelled illumination for the night
+* **minMoonlightIntensity** - min value of modelled illumination for the night
 * **maxMoonlightIntensity** - max value of modelled illumination for the night
-
 * **meanMoonPhase** - mean value of moon phase (% of moon illuminated)
 * **minMoonPhase** - min value of moon phase (% of moon illuminated)
 * **maxMoonPhase** - max value of moon phase (% of moon illuminated)
