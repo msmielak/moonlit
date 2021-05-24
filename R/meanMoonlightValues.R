@@ -52,7 +52,7 @@ calculateMoonlightStatistics <- function(lat, lon, date, e, t, timezone)
 
 
   #for further calculations convert to UTC
-  attr(date, "tzone") <- "UTC"
+  attr(day, "tzone") <- "UTC"
 
 
   #we arrange needed values into a data frame
@@ -62,36 +62,36 @@ calculateMoonlightStatistics <- function(lat, lon, date, e, t, timezone)
   ### and we assign sunrise and sunset to each record using a for() loop
 
   for(i in 1:nrow(data)) {
-  #for(i in 1:100) {
+    #for(i in 1:100) {
 
-   #progress(i, progress.bar = T)
+    #progress(i, progress.bar = T)
 
     #if the record is in the afternoon (in original time zone)
     if (afternoon[i] == TRUE){
 
       #calculate sunset for the same day
-      sunTimes <- getSunlightTimes(day[i], lat[i], lon[i], keep="sunset")
+      sunTimes <- getSunlightTimes(data$day[i], data$lat[i], data$lon[i], keep="sunset")
 
       #and parse it into dataset
       data$sunset[i] <- sunTimes$sunset
 
       #calculate sunrise for the next day
-      sunTimes <- getSunlightTimes(day[i]+1, lat[i], lon[i], keep="sunrise")
+      sunTimes <- getSunlightTimes(data$day[i]+1, data$lat[i], data$lon[i], keep="sunrise")
 
       #and parse it
       data$sunrise[i] <- sunTimes$sunrise
 
-    #if the record isin the morning
+      #if the record isin the morning
     }else{
 
       #calculate sunset for the previous day
-      sunTimes <- getSunlightTimes(day[i]-1, lat[i], lon[i], keep="sunset")
+      sunTimes <- getSunlightTimes(data$day[i]-1, data$lat[i], data$lon[i], keep="sunset")
 
       #and parse it into dataset
       data$sunset[i] <- sunTimes$sunset
 
       #calculate sunrise for the same day
-      sunTimes <- getSunlightTimes(day[i], lat[i], lon[i], keep="sunrise")
+      sunTimes <- getSunlightTimes(data$day[i], data$lat[i], data$lon[i], keep="sunrise")
 
       #and parse it
       data$sunrise[i] <- sunTimes$sunrise
@@ -99,7 +99,6 @@ calculateMoonlightStatistics <- function(lat, lon, date, e, t, timezone)
     }
 
   }
-
 
 
   data$date <- date
@@ -135,7 +134,9 @@ calculateMoonlightStatistics <- function(lat, lon, date, e, t, timezone)
 
   }
 
-  return(data)
+  output <- data[c(5:13)]
+
+  return(output)
 
 
 }
