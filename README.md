@@ -101,7 +101,7 @@ It is used in seq() function so the same values are accepted: A character string
 Function returns a data frame with following columns:
 
 * **date, lat, lon** - the same as the input
-
+*	**sunset** and **sunrise** – time of sunset and sunrise between which the mean value is calcuated 
 * **meanMoonlightIntensity** - mean value of modelled illumination for the night
 * **minMoonlightIntensity** - min value of modelled illumination for the night
 * **maxMoonlightIntensity** - max value of modelled illumination for the night
