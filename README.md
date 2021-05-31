@@ -4,7 +4,11 @@
   <img align="center" src="graphics/moonlit_logo.png" width="250px"/>
 </p>
 
-# moonlit v 0.9
+# moonlit - R package to estimate moonlight intensity for any given place and time 
+
+# v 0.9
+
+
 (c) Michal Smielak 2020  
 Avaiblabe under CC BY-NC-SA 4.0 licence
 
