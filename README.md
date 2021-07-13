@@ -97,7 +97,8 @@ Accepted formats:
 * e - extinction coefficient - the same as the main function, for instance, 0.26
 * t - sampling interval -  15 minutes is more than enough, can go down to 1 hour for large datasets to save time.
 It is used in seq() function so the same values are accepted: A character string, containing one of "sec", "min", "hour". This can optionally be preceded by a (positive or negative) integer and a space, or followed by "s". Example: "15 mins", "3 hour" etc.
-* timezone - time zone of the data - usually in the format "Continent/City", i.e. for Poland: "Europe/Warsaw"
+* timezone - time zone of the data - usually in the format "Continent/City", i.e. for Poland: "Europe/Warsaw"  
+**Note: timezone variable is a workaround for errors appearing when calculating mean values. At some point in the process time zone information is lost, leading to errors. When I manage to locate the source of that error it can be removed. For now, this function should only be applied to data with common time zone. If your data is split betwen multiple time zones you will need to run this function separately for each time zone**
 
 
 Function returns a data frame with following columns:
