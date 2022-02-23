@@ -4,7 +4,9 @@
   <img align="center" src="graphics/moonlit_logo.png" width="250px"/>
 </p>
 
-# moonlit v 0.9
+# moonlit - R package to estimate moonlight intensity for any given place and time (v 0.9)
+
+
 (c) Michal Smielak 2020  
 Avaiblabe under CC BY-NC-SA 4.0 licence
 
@@ -16,7 +18,7 @@ Particularly usefull in determining preference towards high or low illumination 
 
 ### Disclaimer
 
-__This is an early release and functionalities might change. This package is currently pending a peer-review and detailed desctription will be available after it is published. I take no responsibility for the proper functioning of this package. If you have any questions, concerns or you would simply like to apply it to your data, I encourage to contact me directly. Otherwise, basic explaination of currently available functions is be available below.__
+__This is an early release and functionalities might change. This package is currently pending a peer-review and detailed desctription will be available after it is published. I take no responsibility for the proper functioning of this package. If you have any questions, concerns or you would simply like to apply it to your data, I encourage to contact me directly. Otherwise, basic explaination of currently available functions is available below.__
 
 
 ### Currently working functionalities:
@@ -95,7 +97,8 @@ Accepted formats:
 * e - extinction coefficient - the same as the main function, for instance, 0.26
 * t - sampling interval -  15 minutes is more than enough, can go down to 1 hour for large datasets to save time.
 It is used in seq() function so the same values are accepted: A character string, containing one of "sec", "min", "hour". This can optionally be preceded by a (positive or negative) integer and a space, or followed by "s". Example: "15 mins", "3 hour" etc.
-* timezone - time zone of the data - usually in the format "Continent/City", i.e. for Poland: "Europe/Warsaw"
+* timezone - time zone of the data - usually in the format "Continent/City", i.e. for Poland: "Europe/Warsaw"  
+**Note: timezone variable is a workaround for errors appearing when calculating mean values. At some point in the process time zone information is lost, leading to errors. When I manage to locate the source of that error it can be removed. For now, this function should only be applied to data with common time zone. If your data is split betwen multiple time zones you will need to run this function separately for each time zone**
 
 
 Function returns a data frame with following columns:

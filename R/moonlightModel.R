@@ -298,5 +298,25 @@ return(d1)
 
 #test <- calculateMoonlightIntensity(lat, lon, date, 0.26)
 
+##### Calculating an extinction coefficient based on the observer's elevation above sea level
+# extinction coefficient based on the 
+# Peak lunar irradiance is around 560 nm (Veilleux & Cummings, 2012  https://doi.org/10.1242/jeb.071415)
+# Aerosol Optical Depth (AOD) is assumed to be 0.15, an average value 
 
-
+#' Calculate extinction coefficient based on elevation of the observer 
+#'
+#' @param elev 
+#'
+#' @return elevExtCoeff
+#' @export
+#'
+#' @examples
+#' 
+#'
+elevExtCoeff <- function (elev) {
+  
+  e <- 0.1451*exp(-elev/7995)+0.136
+  
+  return(e)
+  
+}
