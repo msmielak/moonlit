@@ -1,6 +1,6 @@
 ### This is reproducible code example for the paper
 ### "Biologically meaningful moonlight measures and their application in ecological research"
-### Smielak, M.S, Körtner, G. (2021)
+### Smielak, M.S (2022)
 
 # load required libraries
 library(ggplot2); theme_set(theme_minimal(base_size=12))
