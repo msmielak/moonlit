@@ -16,7 +16,7 @@
 #' @import lubridate
 #' @import openair
 #'
-#' @return data
+#' @return output
 #' @export
 #'
 
