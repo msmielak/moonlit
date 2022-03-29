@@ -721,11 +721,41 @@ ggplot(PL5)+
 
 ### t-tests to check if values are different from 0 for each quantile
 
-t1 <- t.test(PL1$moonlightDifference, mu = 0, alternative = "greater")
-t2 <- t.test(PL2$moonlightDifference, mu = 0, alternative = "greater")
-t3 <- t.test(PL3$moonlightDifference, mu = 0, alternative = "greater")
-t4 <- t.test(PL4$moonlightDifference, mu = 0, alternative = "greater")
-t5 <- t.test(PL5$moonlightDifference, mu = 0, alternative = "greater")
+t.test(PL1$moonlightDifference)
+t.test(PL2$moonlightDifference)
+t.test(PL3$moonlightDifference)
+t.test(PL4$moonlightDifference)
+t.test(PL5$moonlightDifference)
+
+
+
+# Plotting
+
+library(ggridges)
+
+
+PL$bins <- cut(PL$meanMoonIllumination, breaks=c(-0.01, 0.1, 0.2, 0.3, 0.4, 1), labels=c("0-0.1", "0.1-0.2", "0.2-0.3", "0.3-0.4", ">0.4"))
+
+
+# Boxplots
+ggplot(PL, aes(x=moonlightDifference, y=bins))+
+  geom_boxplot()
+
+# Ridges
+ggplot(PL, aes(x=moonlightDifference, y=bins))+
+  geom_density_ridges(scale=2, quantile_lines = TRUE, quantiles=2, alpha=0.5)+
+  labs(x="Moonlight preference", y="Mean moonlight intensity")
+
+
+# labels to add p-values to the plot
+
+
+t1 <- t.test(PL1$moonlightDifference)
+t2 <- t.test(PL2$moonlightDifference)
+t3 <- t.test(PL3$moonlightDifference)
+t4 <- t.test(PL4$moonlightDifference)
+t5 <- t.test(PL5$moonlightDifference)
+
 
 
 
@@ -745,27 +775,7 @@ labels$p.value <- paste("p = ", labels$p.value)
 labels$label <- paste(labels$mean, ", ", labels$p.value)
 
 
-# Plotting
-
-library(ggridges)
-
-#PL$bins <- cut(PL$maxMoonFraction, breaks=c(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1), labels=c("10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%", "100%"))
-
-PL$bins <- cut(PL$meanMoonIllumination, breaks=c(-0.01, 0.1, 0.2, 0.3, 0.4, 1), labels=c("0-0.1", "0.1-0.2", "0.2-0.3", "0.3-0.4", ">0.4"))
-
-
-#PL$bins2 <- cut(PL$maxMoonFraction, breaks=c(0, 0.25, 0.5, 0.75, 1), labels=c( "0-25%", "25-50%", "50-75%", "75-100%"))
-
-# Boxplots
-ggplot(PL, aes(x=moonlightDifference, y=bins))+
-  geom_boxplot()
-
-# Ridges
-ggplot(PL, aes(x=moonlightDifference, y=bins))+
-  geom_density_ridges(scale=2, quantile_lines = TRUE, quantiles=2, alpha=0.5)+
-  labs(x="Moonlight preference", y="Mean moonlight intensity")
-
-#with p-values
+#with p-values from the t-test
 ggplot(PL, aes(x=moonlightDifference, y=bins))+
   geom_density_ridges(scale=2, quantile_lines = TRUE, quantiles=2, alpha=0.5)+
   labs(x="Moonlight preference", y="Mean moonlight intensity")+
