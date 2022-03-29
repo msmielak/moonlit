@@ -8,7 +8,7 @@
 
 
 (c) Michal Smielak 2020  
-Avaiblabe under CC BY-NC-SA 4.0 licence
+Avaiblabe under GNU General Public License version 3
 
 ## Description
 

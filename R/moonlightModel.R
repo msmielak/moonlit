@@ -240,20 +240,6 @@ night$twilightModel <- night$twilightModel*night$twilight
 
 summary(night$twilightModel)
 
-#############################################################
-#### FUNCTION HAS BEEN REPLACED #############################
-#############################################################
-###Twilight light levels, based on an equation in Revel and Hignett (2004): MONIM the new Met Office Night llumination Model DOI:10.1017/S1350482704001276
-###Calculating illumination in mililux based on solar angle
-
-#night$sunAltDegrees <- night$sunAlt*180/pi
-#night$sunZenithAngle <- 90-night$sunAltDegrees
-#night$twilightIllum   <- (4.6718*10^-4*night$sunZenithAngle^3) - (0.1382*night$sunZenithAngle^2) + (13.1899*night$sunZenithAngle)???405.765
-#night$twilightIllum <- 10^night$twilightIllum*1000
-
-##############################################################
-##############################################################
-
 
 
 ##############################################################
@@ -277,8 +263,8 @@ d1$illumination <- night$illumination
 d1$moonPhase <- night$moonIllum
 
 # This is an obsolete column that calculates moonlight intensity during the day.
-# I needed it for some tests in the past, it is now obsolete as it has no use in ecological studies.
-# I leave it here in case it is needed in the future
+# It was needed for some tests in the past, it is now obsolete as it has no use in ecological studies.
+# It is left here in case it is needed in the future
 
   d1$moonlightModel24 <- night$moonlightModel24
   d1$moonAltDegrees <- night$moonAltDegrees
@@ -298,25 +284,31 @@ return(d1)
 
 #test <- calculateMoonlightIntensity(lat, lon, date, 0.26)
 
-##### Calculating an extinction coefficient based on the observer's elevation above sea level
-# extinction coefficient based on the 
-# Peak lunar irradiance is around 560 nm (Veilleux & Cummings, 2012  https://doi.org/10.1242/jeb.071415)
-# Aerosol Optical Depth (AOD) is assumed to be 0.15, an average value 
 
-#' Calculate extinction coefficient based on elevation of the observer 
+
+######################################################
+###### Extinction coefficient - in development #######
+######################################################
+
+##### Calculating an extinction coefficient based on the observer's elevation above sea level
+# extinction coefficient based on the
+# Peak lunar irradiance is around 560 nm (Veilleux & Cummings, 2012  https://doi.org/10.1242/jeb.071415)
+# Aerosol Optical Depth (AOD) is assumed to be 0.15, an average value
+
+#' Calculate extinction coefficient based on elevation of the observer
 #'
-#' @param elev 
+#' @param elev
 #'
 #' @return elevExtCoeff
 #' @export
 #'
 #' @examples
-#' 
+#'
 #'
 elevExtCoeff <- function (elev) {
-  
+
   e <- 0.1451*exp(-elev/7995)+0.136
-  
+
   return(e)
-  
+
 }
