@@ -6,9 +6,6 @@
 
 # moonlit: R package to estimate moonlight intensity for any given place and time (v 0.9)
 
-If you would like to cite this package:
-Śmielak MK (2021). moonlit: R package to estimate moonlight intensity for any given place and time
-
 
 (c) Michał Śmielak 2021  
 Avaiblabe under GNU General Public License version 3
