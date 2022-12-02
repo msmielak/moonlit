@@ -8,10 +8,10 @@
 #' @import stats
 #' @import graphics
 #'
-#' @param lat
-#' @param lon
-#' @param date
-#' @param e
+#' @param lat - latitude, numerical decimal
+#' @param lon - longitude, numerical decimal
+#' @param date - date time as POSIXct with the local time zone. If needed use as.POSIXct(date, tz=timezone)
+#' @param e - extinction coefficient - a single numerical value depending on the altitude. Average extinction coefficients (magnitude per air mass) are as follows: (At sea level: 0.28; at 500m asl: 0.24; at 1000m asl: 0.21; at 2000m asl: 0.16)
 #'
 #' @return
 #' @export
