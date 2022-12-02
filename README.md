@@ -57,9 +57,10 @@ calculateMoonlightIntensity(lat, lon, date, e)
 Function requires as an input a matrix of values for location and date and a value of extinction coefficient *e*.  
 Accepted formats:
 
-* latitude and longitude - decimal degrees
-* date - POSIXct
-* Extinction coefficient *e* - a single numerical value depending on the altitude. Average extinction coefficients (magnitude per air mass) are as follows:
+* lat - latitude, numerical decimal
+* lon - longitude, numerical decimal
+* date - date time as POSIXct with the local time zone. If needed use as.POSIXct(date, tz=timezone)
+* e - extinction coefficient - a single numerical value depending on the altitude. Average extinction coefficients (magnitude per air mass) are as follows:
   - At sea level: 0.28
   - At 500m asl: 0.24
   - at 1000m asl: 0.21
