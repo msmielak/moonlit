@@ -1,22 +1,27 @@
 
-#' Calculate moonlight intensity
+#'Calculate moonlight intensity
 #'
-#'This function is predicting moonlight intensity on the ground for any given place and time,
-#'based on the location, position of the moon and number of correction factors
+#'This function predicts moonlight intensity on the ground for any given place
+#'and time, based on the location, position of the moon and number of correction
+#'factors
 #'
-#' @import suncalc
-#' @import stats
-#' @import graphics
+#'@import suncalc
+#'@import stats
+#'@import graphics
 #'
-#' @param lat - latitude, numerical decimal
-#' @param lon - longitude, numerical decimal
-#' @param date - date time as POSIXct with the local time zone. If needed use as.POSIXct(date, tz=timezone)
-#' @param e - extinction coefficient - a single numerical value depending on the altitude. Average extinction coefficients (magnitude per air mass) are as follows: (At sea level: 0.28; at 500m asl: 0.24; at 1000m asl: 0.21; at 2000m asl: 0.16)
+#'@param lat - latitude, numerical decimal
+#'@param lon - longitude, numerical decimal
+#'@param date - date time as POSIXct with the local time zone. If needed use
+#'  as.POSIXct(date, tz=timezone)
+#'@param e - extinction coefficient - a single numerical value depending on the
+#'  altitude. Average extinction coefficients (magnitude per air mass) are as
+#'  follows: (At sea level: 0.28; at 500m asl: 0.24; at 1000m asl: 0.21; at
+#'  2000m asl: 0.16)
 #'
-#' @return
-#' @export
+#'@return
+#'@export
 #'
-#' @examples
+#'
 #'
 #'
 #'
@@ -88,37 +93,41 @@ night$night <- night$sunAltDegrees < (0)
 ### Modelling moonlight intensity on the ground ################
 ################################################################
 
-# Model provides an iluminance value for a given location and time. Outcome of the model is a scalar quantity and represents a proportion of reference illumination value. The reference value, in this case, is luminance of full moon at 384400 km (average distance) in zenith.
-# Model includes 4 variables, each providing a correction factor of 0-1:
-# 1) visual extinction
-# 2) distance to the moon relative to mean distance
-# 3) phase effect
-# 4) Angle of incidence of moonlight
-# Final value is obtained by multiplying all 4 values.
+# Model provides an iluminance value for a given location and time. Outcome of
+# the model is a scalar quantity and represents a proportion of reference
+# illumination value. The reference value, in this case, is luminance of full
+# moon at 384400 km (average distance) in zenith. Model includes 4 variables,
+# each providing a correction factor of 0-1: 1) visual extinction 2) distance to
+# the moon relative to mean distance 3) phase effect 4) Angle of incidence of
+# moonlight Final value is obtained by multiplying all 4 values.
 
-##############################
-### 1) Visual extinction of the stars depending on the angle of the atmosphere
-### equations provided in: Green, Daniel W. E. 1992. "Magnitude Corrections for Atmospheric Extinction." International Comet Quarterly 14: 55-59
-### Average extinction coefficients (magnitude per air mass) are as follows:
-### At sea level: 0.28
-### At 500m asl: 0.24
-### at 1000m asl: 0.21
-### at 2000m asl: 0.16
-### Default value in the model is for 1000m asl and, if needed, should be changed below:
-###############################
+############################## 1) Visual extinction of the stars depending on
+###the angle of the atmosphere equations provided in: Green, Daniel W. E. 1992.
+###"Magnitude Corrections for Atmospheric Extinction." International Comet
+###Quarterly 14: 55-59 Average extinction coefficients (magnitude per air mass)
+###are as follows:
+#At sea level: 0.28
+#At 500m asl: 0.24
+#at 1000m asl: 0.21
+#at 2000m asl: 0.16
+#Default value in the model is for 1000m asl and, if needed,
+###should be changed below: ############################
 
 #extCoef <- 0.21
 
-#Calculating thikness of the atmosphere (airmass value) at given elevation. Note that elevation is above the horizon,
-#so we need to use 90-elevation from suncalc model.
-#might show false results for moon altitude <0, but these always have value 0 in end model so it doesn't matter.
-#moon altitude must be in radians!
+#Calculating thikness of the atmosphere (airmass value) at given elevation. Note
+#that elevation is above the horizon, so we need to use 90-elevation from
+#suncalc model. Might show false results for moon altitude <0, but these always
+#have value 0 in end model so it doesn't matter. moon altitude must be in
+#radians!
 
 night$airMass <- 1/(cos(pi/2-night$moonAlt)+0.025*2.71827^(-11*cos(pi/2-night$moonAlt)))
 
 
-#difference in magnitudes - in zenith the absortion reduces brightess by 0.24 magnitude, or ~20%, a minimal value possible.
-#We will calculate the difference between extinction at given angle and extinction at zenith and transform it to proportion
+#difference in magnitudes - in zenith the absortion reduces brightess by 0.24
+#magnitude, or ~20%, a minimal value possible. We will calculate the difference
+#between extinction at given angle and extinction at zenith and transform it to
+#proportion
 
 night$airMassMagnitude <- (night$airMass-1)*extCoef
 
@@ -136,7 +145,8 @@ night$atmExtinction <- 10^(-0.4*night$airMassMagnitude)
 ####### 2) Distance to the moon ##########
 ##########################################
 
-### the illumination is proportional to 1/(distance^2) (inverse-square law, Meeus 1991), therefore relative illumination:
+### the illumination is proportional to 1/(distance^2) (inverse-square law,
+### Meeus 1991), therefore relative illumination:
 night$distanceIllum = 1/(night$distance/384400)^2
 
 
@@ -146,7 +156,9 @@ night$distanceIllum = 1/(night$distance/384400)^2
 
 ###Relationship between phase angle (Sun-Moon-observer) and normalised, disc-integrated brightness of the moon
 ###Data extracted from a plot and interpolation function created for further use in the model
-###Source: Buratti, Bonnie J., John K. Hillier, and Michael Wang. 1996. "The Lunar Opposition Surge: Observations by Clementine." Icarus 124 (December): 490-99. https://doi.org/10.1006/icar.1996.0225.
+###Source: Buratti, Bonnie J., John K. Hillier, and Michael Wang. 1996. "The
+###Lunar Opposition Surge: Observations by Clementine." Icarus 124 (December):
+###490-99. https://doi.org/10.1006/icar.1996.0225.
 
 #Data points
 #phase angle in degrees
@@ -188,26 +200,27 @@ night$incidence <- sin(night$moonAlt)
 ######################################################
 ##### total correction factor #######################
 
-# assign values of 0 if not night and 0 if moon not visible
-# then multiplied variables 1:4
-# turns out there are some occasional NAs because atmExtinction is infinite, so will have to correct for that by making a conditional version of the model output
+# assign values of 0 if moon not visible then multiply
+# variables 1:4
 
-night$illuminationModelComponents <- (night$night > 0) * (night$moonAlt > 0 ) * night$atmExtinction * night$distanceIllum * night$phaseEffect * night$incidence
-night$illuminationModel <- ifelse((night$moonAlt<=0 | night$night <=0), 0,  night$illuminationModelComponents)
+# turns out there are some occasional NAs because atmExtinction is
+# infinite, corrected for that by making a conditional version of
+# the model output
 
-
-night$moonlightModel <- night$illuminationModel
-
-
-
-# Alternatively calculating values for moonlight also during the night
-
-night$moonlight24hComponents <- (night$moonAlt > 0 ) * night$atmExtinction * night$distanceIllum * night$phaseEffect * night$incidence
-night$moonlightModel24 <- ifelse((night$moonAlt<=0), 0,  night$moonlight24hComponents)
+night$illuminationModelComponents <- (night$moonAlt > 0 ) * night$atmExtinction * night$distanceIllum * night$phaseEffect * night$incidence
+night$moonlightModel <- ifelse((night$moonAlt<=0), 0,  night$illuminationModelComponents)
 
 
 
-#plot(night$date, night$illuminationModel, col = "red")
+
+#Alternative version of the model, assigning 0 when sun above the horizon. This
+#is not really needed as there is a separate column night=TRUE/FALSE
+
+
+# night$illuminationModelComponents <- (night$night > 0) * (night$moonAlt > 0 ) * night$atmExtinction * night$distanceIllum * night$phaseEffect * night$incidence
+# night$moonlightModel <- ifelse((night$moonAlt<=0 | night$night <=0), 0,  night$illuminationModelComponents)
+
+
 
 
 
@@ -215,7 +228,11 @@ night$moonlightModel24 <- ifelse((night$moonAlt<=0), 0,  night$moonlight24hCompo
 #############################################################
 ##############################################################
 #### Twilight illumination from empirical data https://www.jstor.org/stable/44612241
-####  Sun Position and Twilight Times for Driver Visibility Assessment; Duane D. MacInnis, Peter B. Williamson and Geoffrey P. Nielsen; SAE Transactions; Vol. 104, Section 6: JOURNAL OF PASSENGER CARS: Part 1 (1995), pp. 759-783
+
+####  Sun Position and Twilight Times for Driver Visibility Assessment; Duane D.
+####  MacInnis, Peter B. Williamson and Geoffrey P. Nielsen; SAE Transactions;
+####  Vol. 104, Section 6: JOURNAL OF PASSENGER CARS: Part 1 (1995), pp. 759-783
+
 ####  Values calulated from the paper for angles -18 to 5 degrees, by 0.25 degree, imported to R and spline function applied
 ##############################################################
 
@@ -238,43 +255,36 @@ night$twilightModel <- night$twilightModel*night$twilight
 
 #plot(night$sunAltDegrees, night$twilightModel)
 
-summary(night$twilightModel)
+#summary(night$twilightModel)
 
 
 
 ##############################################################
 ### Combining twilight illumination with lunar illumination ###
 
-night$illumination <- night$illuminationModel*0.32 + night$twilightModel
+night$illumination <- night$moonlightModel*0.32 + night$twilightModel
 
-#plot(night$date, night$illuminationModel)
-#plot(night$date, night$illumination)
+#plot(night$date, night$illuminationModel, type="l")
+#plot(night$date, night$illumination, type="l")
 
 
 
 
 #generating output data frame
-#d1$sunPosition <- night$sunAlt
 d1$night <- night$night
 d1$sunAltDegrees <- night$sunAltDegrees
+d1$moonAltDegrees <- night$moonAltDegrees
 d1$moonlightModel <- night$moonlightModel
 d1$twilightModel <- night$twilightModel
 d1$illumination <- night$illumination
 d1$moonPhase <- night$moonIllum
 
-# This is an obsolete column that calculates moonlight intensity during the day.
-# It was needed for some tests in the past, it is now obsolete as it has no use in ecological studies.
-# It is left here in case it is needed in the future
-
-  d1$moonlightModel24 <- night$moonlightModel24
-  d1$moonAltDegrees <- night$moonAltDegrees
 
 
 #test plot
-
-night<- night[order(date),]
-plot(night$date, night$moonlightModel, type = "l")
-points(night$date, night$illuminationModel)
+# night<- night[order(date),]
+# plot(d1$date, d1$moonPhase)
+# lines(d1$date, d1$moonlightModel)
 
 
 return(d1)
@@ -297,7 +307,7 @@ return(d1)
 
 #' Calculate extinction coefficient based on elevation of the observer
 #'
-#' @param elev
+#' @param elev elevation in meters asl
 #'
 #' @return elevExtCoeff
 #' @export
@@ -305,6 +315,7 @@ return(d1)
 #' @examples
 #'
 #'
+
 elevExtCoeff <- function (elev) {
 
   e <- 0.1451*exp(-elev/7995)+0.136

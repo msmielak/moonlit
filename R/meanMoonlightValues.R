@@ -3,12 +3,20 @@
 
 #' Title
 #'
-#' @param lat
-#' @param lon
-#' @param date
-#' @param e
-#' @param t
-#' @param timezone
+#' @param lat latitude, numerical decimal
+#' @param lon longitude, numerical decimal
+#' @param date date time as POSIXct with the local time zone. If needed use
+#'   as.POSIXct(date, tz=timezone)
+#' @param e extinction coefficient - a single numerical value depending on the
+#'   altitude. Average extinction coefficients (magnitude per air mass) are as
+#'   follows: (At sea level: 0.28; at 500m asl: 0.24; at 1000m asl: 0.21; at
+#'   2000m asl: 0.16)
+#' @param t sampling interval. It is used in seq() function so the same values
+#'   are accepted: A character string, containing one of "sec", "min", "hour".
+#'   This can optionally be preceded by a (positive or negative) integer and a
+#'   space, or followed by "s". Example: "15 mins", "3 hour" etc.
+#' @param timezone time zone of the data usually in the format "Continent/City",
+#'   i.e. for Poland: "Europe/Warsaw"
 #'
 #' @import suncalc
 #' @import stats
@@ -22,9 +30,11 @@
 
 
 
-### function to calculate mean moonlight values for a night
-### requirest the same input as calculateMoonlightIntensity() function, plus an extra value t representing temporal resolution (in minutes)
-### for larger datastes (thousands of nights) t = 30 is a reasonable value, for smaller ones you can increase the resolutions to 15 or more.
+### function to calculate mean moonlight values for a night requirest the same
+### input as calculateMoonlightIntensity() function, plus an extra value t
+### representing temporal resolution (in minutes) for larger datastes (thousands
+### of nights) t = 30 is a reasonable value, for smaller ones you can increase
+### the resolutions to 15 or more.
 
 calculateMoonlightStatistics <- function(lat, lon, date, e, t, timezone)
 
@@ -36,16 +46,19 @@ calculateMoonlightStatistics <- function(lat, lon, date, e, t, timezone)
 
 
 
-  #take date-time which is in local time zone and divine into before- and afternoon.
-  #Assign a variable for that - it will be needed to decide which date to use for sunset and sunrise
+  #take date-time which is in local time zone and divine into before- and
+  #afternoon. Assign a variable for that - it will be needed to decide which
+  #date to use for sunset and sunrise
   afternoon <- hour(date) >= 12
 
 
 
 
-  # To calculate statistics for each night we need to use night (from noon to noon) and not a day (from midnight to midnight)
-  # we use new variable afternoon the day when this night started
-  # for records from noon to midnight nothing changes, for records from midnight to noon we assign the previous day etc
+  # To calculate statistics for each night we need to use night (from noon to
+  # noon) and not a day (from midnight to midnight) we use new variable
+  # afternoon the day when this night started for records from noon to midnight
+  # nothing changes, for records from midnight to noon we assign the previous
+  # day etc
 
   # for getSunlightTimes we need date and coordinates:
   day <-  as.Date(date, tz=timezone)

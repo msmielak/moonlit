@@ -2,6 +2,7 @@
 
 export(calculateMoonlightIntensity)
 export(calculateMoonlightStatistics)
+export(elevExtCoeff)
 import(graphics)
 import(lubridate)
 import(openair)
