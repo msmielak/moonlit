@@ -7,20 +7,15 @@
 calculateMoonlightIntensity(lat, lon, date, e)
 }
 \arguments{
-\item{e}{}
-}
-\value{
+\item{lat}{- latitude, numerical decimal}
 
+\item{lon}{- longitude, numerical decimal}
+
+\item{date}{- date time as POSIXct with the local time zone. If needed use as.POSIXct(date, tz=timezone)}
+
+\item{e}{- extinction coefficient - a single numerical value depending on the altitude. Average extinction coefficients (magnitude per air mass) are as follows: (At sea level: 0.28; at 500m asl: 0.24; at 1000m asl: 0.21; at 2000m asl: 0.16)}
 }
 \description{
-This function is predicting moonlight intensity on the ground for any given place and time,
+This function predicts moonlight intensity on the ground for any given place and time,
 based on the location, position of the moon and number of correction factors
-}
-\examples{
-
-
-
-
-
-
 }

@@ -7,10 +7,20 @@
 calculateMoonlightStatistics(lat, lon, date, e, t, timezone)
 }
 \arguments{
-\item{timezone}{}
+\item{lat}{latitude, numerical decimal}
+
+\item{lon}{longitude, numerical decimal}
+
+\item{date}{date time as POSIXct with the local time zone. If needed use as.POSIXct(date, tz=timezone)}
+
+\item{e}{extinction coefficient - a single numerical value depending on the altitude. Average extinction coefficients (magnitude per air mass) are as follows: (At sea level: 0.28; at 500m asl: 0.24; at 1000m asl: 0.21; at 2000m asl: 0.16)}
+
+\item{t}{sampling interval}
+
+\item{timezone}{time zone of the data}
 }
 \value{
-data
+output
 }
 \description{
 Title
