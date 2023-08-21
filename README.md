@@ -119,7 +119,7 @@ Function returns a data frame with following columns:
 * **minMoonPhase** - min value of moon phase (% of moon illuminated)
 * **maxMoonPhase** - max value of moon phase (% of moon illuminated)
 
-
+**Note: statistics can only be calculated when there is both sunrise and sunset on that given night. This is usually not an issue but during polar summer or winter there might not be a sunrise and sunset. If that is the case in your data, for now, you will need to remove these nights from your dataset manually. If in doubt or if you are getting "Error in seq.int(0, to0 - from, by) : 'to' must be a finite number", use sunrise() and sunset() functions from the package suncalc to check if that is the case**
 
 ## References
 
