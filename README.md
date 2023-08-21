@@ -92,6 +92,8 @@ calculateMoonlightStatistics(lat, lon, date, e, t, timezone)
 
 This function calculates **nightly** statistics for moonlight illumination and moon phase.
 
+**Note: statistics can only be calculated when there is both sunrise and sunset on that given night. This is usually not an issue but during polar summer or winter there might not be a sunrise and sunset. If that is the case in your data, for now, you will need to remove these nights from your dataset manually. If in doubt or if you are getting "Error in seq.int(0, to0 - from, by) : 'to' must be a finite number", use sunrise() and sunset() functions from the package suncalc to check if that is the case**
+
 For each record it will assing min, max and mean values for the night. For diurnal records, the **nearest** night is assigned, so for records before noon it returns statistics for the night that starts on the previous day, and for records after noon it assigns statistics for the night that starts on this day.
 
 Function requires as an input a matrix of values for location and date, local time zone and a value of extinction coefficient *e*.  
