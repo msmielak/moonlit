@@ -26,12 +26,8 @@ This package is particularly useful in determining preference towards high or lo
 If you use `moonlit` package in your research, please cite:
 Śmielak, M.K. Biologically meaningful moonlight measures and their application in ecological research. Behav Ecol Sociobiol 77, 21 (2023). https://doi.org/10.1007/s00265-022-03287-2
 
-### Disclaimer
 
-While this package has been thoroughly tested and is based on peer-reviewed research, users should always validate results for their specific use cases. If you have any questions, concerns, or would like assistance applying this package to your data, please feel free to contact the author directly.
-
-
-### Currently working functionalities:
+## Currently working functionalities:
 
 - [x] Predicting moonlight intensity on the ground for any given place and time
 - [x] Predicting twilight illumination levels 
@@ -126,7 +122,7 @@ Function returns a data frame with following columns:
 
 **Note: statistics can only be calculated when there is both sunrise and sunset on a given night. This is usually not an issue but during polar summer or winter there might not be a sunrise and sunset. If that is the case in your data, for now, you will need to remove these nights from your dataset manually. If in doubt or if you are getting "Error in seq.int(0, to0 - from, by) : 'to' must be a finite number", use sunrise() and sunset() functions from the package suncalc to check if that is the case**
 
-### Examples
+## Examples
 
 ```R
 library(moonlit)
@@ -142,3 +138,8 @@ result <- calculateMoonlightIntensity(lat, lon, date, e = 0.26)
 
 stats <- calculateMoonlightStatistics(lat, lon, date, e = 0.26, t = "15 mins", timezone = "Europe/Warsaw")
 ```
+
+## Disclaimer
+
+While this package has been thoroughly tested and is based on peer-reviewed research, users should always validate results for their specific use cases. If you have any questions, concerns, or would like assistance applying this package to your data, please feel free to contact the author directly.
+
