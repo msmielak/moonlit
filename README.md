@@ -4,33 +4,36 @@
   <img align="center" src="graphics/moonlit_logo.png" width="250px"/>
 </p>
 
-# moonlit: R package to estimate moonlight intensity for any given place and time (v 0.9)
+# moonlit: R package to estimate moonlight intensity for any given place and time (v 0.1.0)
 
 
 (c) Michał Śmielak 2021  
 Avaiblabe under GNU General Public License version 3
 
+
+Moon phase is often used to represent lunar illumination as an environmental niche, but it is a poor proxy for actual moonlight intensity on the ground. A model is therefore proposed to estimate lunar illumination for any given place and time. The model is shown to provide a significantly better prediction of empirically measured lunar illumination than moon phase. Importantly, it also has much higher temporal resolutions, allowing to not only detect selectiveness for light levels between nights but also within each night, which is not achievable with moon phase alone. This offers unprecedented opportunities to study complex activity patterns of nocturnal species using any time-stamped data (GPS trackers, camera traps, song meters, etc.). It can also be applied to historical datasets, as well as facilitate future research planning in a wide range of ecological and behavioural studies.
+
+
 ## Description
 
-R package providing biologically meaningful moonlight measures. Allows to study ecological and behavioural effects of changing moonlight intensity.
-Particularly usefull in determining preference towards high or low illumination levels in different temporal scales (night, lunar cycle, seasons, years).
+`moonlit` is an R package providing biologically meaningful moonlight measures. It allows researchers to study ecological and behavioral effects of changing moonlight intensity. Unlike simple moon phase calculations, `moonlit` accounts for various factors affecting ground illumination, including the moon's position, atmospheric extinction, and twilight effects. Importantly, it can calculate moonlight intensity values any interval.
 
+This package is particularly useful in determining preference towards high or low illumination levels across different temporal scales (night, lunar cycle, seasons, years), offering a significant improvement over traditional moon phase-based analyses.
 
 ## Citation
-
+If you use `moonlit` package in your research, please cite:
 Śmielak, M.K. Biologically meaningful moonlight measures and their application in ecological research. Behav Ecol Sociobiol 77, 21 (2023). https://doi.org/10.1007/s00265-022-03287-2
-
 
 ### Disclaimer
 
-__This is an early release and functionalities might change. This package is currently pending a peer-review and detailed desctription will be available after it is published. I take no responsibility for the proper functioning of this package. If you have any questions, concerns or you would simply like to apply it to your data, I encourage to contact me directly. Otherwise, basic explaination of currently available functions is available below.__
+While this package has been thoroughly tested and is based on peer-reviewed research, users should always validate results for their specific use cases. If you have any questions, concerns, or would like assistance applying this package to your data, please feel free to contact the author directly.
 
 
 ### Currently working functionalities:
 
 - [x] Predicting moonlight intensity on the ground for any given place and time
 - [x] Predicting twilight illumination levels 
-- [x] Calculating nightly mean illumianation levels for a given location
+- [x] Calculating nightly mean illumination levels for a given location (particularly useful to determine moonlight preferences using time stamped species detections)
 
 
 
@@ -112,21 +115,24 @@ It is used in seq() function so the same values are accepted: A character string
 Function returns a data frame with following columns:
 
 *	**sunset** and **sunrise** – time of sunset and sunrise between which the mean value is calcuated 
-* **meanMoonlightIntensity** - mean value of modelled illumination for the night
-* **minMoonlightIntensity** - min value of modelled illumination for the night
-* **maxMoonlightIntensity** - max value of modelled illumination for the night
+* **meanMoonlightIntensity** - mean value of modeled illumination for the night
+* **minMoonlightIntensity** - min value of modeled illumination for the night
+* **maxMoonlightIntensity** - max value of modeled illumination for the night
 * **meanMoonPhase** - mean value of moon phase (% of moon illuminated)
 * **minMoonPhase** - min value of moon phase (% of moon illuminated)
 * **maxMoonPhase** - max value of moon phase (% of moon illuminated)
 
-**Note: statistics can only be calculated when there is both sunrise and sunset on that given night. This is usually not an issue but during polar summer or winter there might not be a sunrise and sunset. If that is the case in your data, for now, you will need to remove these nights from your dataset manually. If in doubt or if you are getting "Error in seq.int(0, to0 - from, by) : 'to' must be a finite number", use sunrise() and sunset() functions from the package suncalc to check if that is the case**
+**Note: statistics can only be calculated when there is both sunrise and sunset on a given night. This is usually not an issue but during polar summer or winter there might not be a sunrise and sunset. If that is the case in your data, for now, you will need to remove these nights from your dataset manually. If in doubt or if you are getting "Error in seq.int(0, to0 - from, by) : 'to' must be a finite number", use sunrise() and sunset() functions from the package suncalc to check if that is the case**
 
-## References
+### Example
 
-* Kyba, C., A. Mohar, and T. Posch. How bright is moonlight? Astronomy & Geophysics. 2017, 58:1.31–31.32. DOI: 10.1093/astrogeo/atx025  
-* Prugh LR, Golden CD. Does moonlight increase predation risk? Meta-analysis reveals divergent responses of nocturnal mammals to lunar cycles. Journal of Animal Ecology. 2014 Mar;83(2):504-14. DOI: 10.1111/1365-2656.12148.  
-* Austin, R. H., Phillips, B. F. and Webb, D. J. Method for calculating moonlight illuminance at the earth's surface. Journal of Applied Ecology 13 (3): 741–48. DOI:10.2307/2402251  
-* Green, D. W. E. Magnitude corrections for atmospheric extinction. International Comet Quarterly. 1992 (14):55-59  
-* Agafonkin, V., Benoit T. Suncalc: Compute Sun Position, Sunlight Phases, Moon Position and Lunar Phase (version 0.4). 2018. https://CRAN.R-project.org/package=suncalc.  
-* Buratti, Bonnie J., John K. Hillier, and Michael Wang. The Lunar Opposition Surge: Observations by Clementine.” Icarus. 1996 Dec;124:490–99. DOI: 10.1006/icar.1996.0225
+library(moonlit)
 
+# Calculate moonlight intensity in Warsaw on 15/10/2023 at 22:00
+lat <- 52.2297
+lon <- 21.0122
+date <- as.POSIXct("2023-10-15 22:00:00", tz = "Europe/Warsaw")
+result <- calculateMoonlightIntensity(lat, lon, date, e = 0.21)
+
+# Calculate nightly statistics for the entire night starting on 15/10/2023
+stats <- calculateMoonlightStatistics(lat, lon, date, e = 0.21, t = "15 mins", timezone = "Europe/Warsaw")

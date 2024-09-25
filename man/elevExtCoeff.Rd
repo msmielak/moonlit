@@ -15,3 +15,11 @@ elevExtCoeff
 \description{
 Calculate extinction coefficient based on elevation of the observer
 }
+\examples{
+\dontrun{
+
+elev <- 2228 # Elevation in m asl for Mount Kosciuszko
+result <- elevExtCoeff(elev)
+}
+
+}

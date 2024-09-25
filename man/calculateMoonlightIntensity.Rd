@@ -7,15 +7,39 @@
 calculateMoonlightIntensity(lat, lon, date, e)
 }
 \arguments{
-\item{lat}{- latitude, numerical decimal}
+\item{lat}{Latitude, numerical decimal}
 
-\item{lon}{- longitude, numerical decimal}
+\item{lon}{Longitude, numerical decimal}
 
-\item{date}{- date time as POSIXct with the local time zone. If needed use as.POSIXct(date, tz=timezone)}
+\item{date}{Date time as POSIXct with the local time zone. If needed use
+as.POSIXct(date, tz=timezone)}
 
-\item{e}{- extinction coefficient - a single numerical value depending on the altitude. Average extinction coefficients (magnitude per air mass) are as follows: (At sea level: 0.28; at 500m asl: 0.24; at 1000m asl: 0.21; at 2000m asl: 0.16)}
+\item{e}{Extinction coefficient - a single numerical value depending on the
+altitude. Average extinction coefficients (magnitude per air mass) are as
+follows: At sea level: 0.28; at 500m asl: 0.24; at 1000m asl: 0.21; at
+2000m asl: 0.16}
+}
+\value{
+A data frame with the following columns:
+  \item{night}{Logical, TRUE when sun is below the horizon}
+  \item{sunAltDegrees}{Solar altitude in degrees}
+  \item{moonlightModel}{Predicted moonlight illumination, relative to an "average" full moon}
+  \item{twilightModel}{Predicted twilight illumination in lux}
+  \item{illumination}{Combined moon and twilight intensity, in lux}
+  \item{moonPhase}{Lunar phase as a numerical value (\% of moon face illuminated)}
 }
 \description{
-This function predicts moonlight intensity on the ground for any given place and time,
-based on the location, position of the moon and number of correction factors
+This function predicts moonlight intensity on the ground for any given place
+and time, based on the location, position of the moon and number of correction
+factors
+}
+\examples{
+\dontrun{
+lat <- 52.2297
+lon <- 21.0122
+date <- as.POSIXct("2023-06-15 22:00:00", tz = "Europe/Warsaw")
+result <- calculateMoonlightIntensity(lat, lon, date, 0.21)
+}
+
+
 }
