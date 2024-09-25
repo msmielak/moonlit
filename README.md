@@ -11,6 +11,8 @@
 Avaiblabe under GNU General Public License version 3
 
 
+## Introduction
+
 Moon phase is often used to represent lunar illumination as an environmental niche, but it is a poor proxy for actual moonlight intensity on the ground. A model is therefore proposed to estimate lunar illumination for any given place and time. The model is shown to provide a significantly better prediction of empirically measured lunar illumination than moon phase. Importantly, it also has much higher temporal resolutions, allowing to not only detect selectiveness for light levels between nights but also within each night, which is not achievable with moon phase alone. This offers unprecedented opportunities to study complex activity patterns of nocturnal species using any time-stamped data (GPS trackers, camera traps, song meters, etc.). It can also be applied to historical datasets, as well as facilitate future research planning in a wide range of ecological and behavioural studies.
 
 
