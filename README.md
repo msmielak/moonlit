@@ -1,7 +1,7 @@
 
 
 <p align="center">
-  <img align="center" src="graphics/moonlit_logo.png" width="250px"/>
+  <img align="center" src="inst/graphics/moonlit_logo.png" width="250px"/>
 </p>
 
 # moonlit: R package to estimate moonlight intensity for any given place and time (v 0.1.0)
