@@ -126,15 +126,19 @@ Function returns a data frame with following columns:
 
 **Note: statistics can only be calculated when there is both sunrise and sunset on a given night. This is usually not an issue but during polar summer or winter there might not be a sunrise and sunset. If that is the case in your data, for now, you will need to remove these nights from your dataset manually. If in doubt or if you are getting "Error in seq.int(0, to0 - from, by) : 'to' must be a finite number", use sunrise() and sunset() functions from the package suncalc to check if that is the case**
 
-### Example
+### Examples
 
+```R
 library(moonlit)
 
 # Calculate moonlight intensity in Warsaw on 15/10/2023 at 22:00
+
 lat <- 52.2297
 lon <- 21.0122
 date <- as.POSIXct("2023-10-15 22:00:00", tz = "Europe/Warsaw")
-result <- calculateMoonlightIntensity(lat, lon, date, e = 0.21)
+result <- calculateMoonlightIntensity(lat, lon, date, e = 0.26)
 
 # Calculate nightly statistics for the entire night starting on 15/10/2023
-stats <- calculateMoonlightStatistics(lat, lon, date, e = 0.21, t = "15 mins", timezone = "Europe/Warsaw")
+
+stats <- calculateMoonlightStatistics(lat, lon, date, e = 0.26, t = "15 mins", timezone = "Europe/Warsaw")
+```
