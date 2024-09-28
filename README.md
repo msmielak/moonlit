@@ -32,6 +32,7 @@ If you use `moonlit` package in your research, please cite:
 - [x] Predicting moonlight intensity on the ground for any given place and time
 - [x] Predicting twilight illumination levels 
 - [x] Calculating nightly mean illumination levels for a given location (particularly useful to determine moonlight preferences using time stamped species detections)
+- [x] Estimating extinction coefficient for a given elevation asl (although this is usually not necessary)
 
 
 
@@ -122,6 +123,26 @@ Function returns a data frame with following columns:
 
 **Note: statistics can only be calculated when there is both sunrise and sunset on a given night. This is usually not an issue but during polar summer or winter there might not be a sunrise and sunset. If that is the case in your data, for now, you will need to remove these nights from your dataset manually. If in doubt or if you are getting "Error in seq.int(0, to0 - from, by) : 'to' must be a finite number", use sunrise() and sunset() functions from the package suncalc to check if that is the case**
 
+---
+#### elevExtCoeff()
+```R
+elevExtCoeff(elev)
+```
+
+This function calculates an extinction coefficient based on the observer's elevation and requires a single parameter:
+* **elev** - elevation in metres above sea level, numerical
+
+The impact on the overall moonlight intensity estimates is limited, therefore for sites that share similar elevations a nearest sample value is recommended for all calculations as described in calculateMoonlightIntensity().
+
+When comparing sites with significant difference in altitude this function can be used to estimate extiction coefficient more precisely, although at the moment calculateMoonlightIntensity() function only takes a single value so model should be applied to each site separately.
+
+In the future the main function can be amended to take in a separate column with elevation asl and this fuction will be used to calculate extinction coefficient automatically for each record.
+
+Extinction coefficient calculatios are based on peak lunar irradiance of around 560 nm (Veilleux & Cummings, 2012  https://doi.org/10.1242/jeb.071415). Aerosol Optical Depth (AOD) is assumed to be 0.15, an average value.
+
+
+
+---
 ## Examples
 
 ```R
