@@ -24,7 +24,8 @@ This package is particularly useful in determining preference towards high or lo
 
 ## Citation
 If you use `moonlit` package in your research, please cite:
-Śmielak, M.K. Biologically meaningful moonlight measures and their application in ecological research. Behav Ecol Sociobiol 77, 21 (2023). https://doi.org/10.1007/s00265-022-03287-2
+
+> Śmielak, M.K. Biologically meaningful moonlight measures and their application in ecological research. Behav Ecol Sociobiol 77, 21 (2023). https://doi.org/10.1007/s00265-022-03287-2
 
 
 ## Currently working functionalities:
@@ -32,7 +33,7 @@ If you use `moonlit` package in your research, please cite:
 - [x] Predicting moonlight intensity on the ground for any given place and time
 - [x] Predicting twilight illumination levels 
 - [x] Calculating nightly mean illumination levels for a given location (particularly useful to determine moonlight preferences using time stamped species detections)
-- [x] Estimating extinction coefficient for a given elevation asl (although this is usually not necessary)
+- [ ] Estimating extinction coefficient for a given elevation asl (__experimental - use with caution__)
 
 
 
