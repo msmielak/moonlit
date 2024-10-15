@@ -128,6 +128,9 @@ Function returns a data frame with following columns:
 ```R
 elevExtCoeff(elev)
 ```
+> [!CAUTION]
+> Still under development and my produce wrong results. For the moment I recommend using preset e values as listed in the main function.
+> Once properly tested this function will be incorporated in the main model
 
 This function calculates an extinction coefficient based on the observer's elevation and requires a single parameter:
 * **elev** - elevation in metres above sea level, numerical
