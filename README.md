@@ -84,8 +84,9 @@ Function returns a data frame with following columns:
 
 It will also conveniently plot predicted values as points and moon phase as line, allowing for quick visual comparison of the two measures.
 
-**Caution -  currently it assigns 0 when sun is above the horizon, even if the moon is visible. Normally, this is not a problem, becasue when sun is visible, moonlight is negligible, but it is worth keeping that in mind. I might change that at some point as there is a "night" field so users can filter out night-only records on their own.**
-
+> [!NOTE]
+> Currently it assigns 0 when sun is above the horizon, even if the moon is visible. Normally, this is not a problem, becasue when sun is visible, moonlight is negligible in comparison.
+> If you want to calculate of moonlight intensity during the day it is not possible using this function and would require a custom approach.
 ---
 #### calculateMoonlightStatistics()
 ```R
@@ -121,7 +122,8 @@ Function returns a data frame with following columns:
 * **minMoonPhase** - min value of moon phase (% of moon illuminated)
 * **maxMoonPhase** - max value of moon phase (% of moon illuminated)
 
-**Note: statistics can only be calculated when there is both sunrise and sunset on a given night. This is usually not an issue but during polar summer or winter there might not be a sunrise and sunset. If that is the case in your data, for now, you will need to remove these nights from your dataset manually. If in doubt or if you are getting "Error in seq.int(0, to0 - from, by) : 'to' must be a finite number", use sunrise() and sunset() functions from the package suncalc to check if that is the case**
+> [!NOTE]
+> Statistics can only be calculated when there is both sunrise and sunset on a given night. This is usually not an issue but during polar summer or winter there might not be a sunrise and sunset. If that is the case in your data, for now, you will need to remove these nights from your dataset manually. If in doubt or if you are getting "Error in seq.int(0, to0 - from, by) : 'to' must be a finite number", use sunrise() and sunset() functions from the package suncalc to check if that is the case.
 
 ---
 #### elevExtCoeff()
@@ -129,7 +131,7 @@ Function returns a data frame with following columns:
 elevExtCoeff(elev)
 ```
 > [!CAUTION]
-> Still under development and my produce wrong results. For the moment I recommend using preset e values as listed in the main function.
+> Still under development and my produce wrong results. For the moment it is recommended to use preset e values as listed in the main function.
 > Once properly tested this function will be incorporated in the main model
 
 This function calculates an extinction coefficient based on the observer's elevation and requires a single parameter:
