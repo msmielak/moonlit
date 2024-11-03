@@ -96,7 +96,6 @@ calculateMoonlightStatistics(lat, lon, date, e, t, timezone)
 
 This function calculates **nightly** statistics for moonlight illumination and moon phase.
 
-**Note: statistics can only be calculated when there is both sunrise and sunset on the night you are analysing. This is usually not an issue but during polar summer or winter there might not be a sunrise and sunset. If that is the case in your data, for now, you will need to remove these nights from your dataset manually. If in doubt or if you are getting "Error in seq.int(0, to0 - from, by) : 'to' must be a finite number", use sunrise() and sunset() functions from the package suncalc to check if that is the case**
 
 For each record it will assing min, max and mean values for the night. For diurnal records, the **nearest** night is assigned, so for records before noon it returns statistics for the night that starts on the previous day, and for records after noon it assigns statistics for the night that starts on this day.
 
@@ -124,7 +123,12 @@ Function returns a data frame with following columns:
 * **maxMoonPhase** - max value of moon phase (% of moon illuminated)
 
 > [!NOTE]
-> Statistics can only be calculated when there is both sunrise and sunset on a given night. This is usually not an issue but during polar summer or winter there might not be a sunrise and sunset. If that is the case in your data, for now, you will need to remove these nights from your dataset manually. If in doubt or if you are getting "Error in seq.int(0, to0 - from, by) : 'to' must be a finite number", use sunrise() and sunset() functions from the package suncalc to check if that is the case.
+> This function calculates assigns each record to a given night. A night here is a period between sunset and a sunrise within a 24h window from noon to noon.
+> 
+> Statistics can only be calculated when there is both sunrise and sunset on a given date. This is usually not an issue but during polar summer or winter there might not be a sunrise and sunset (a day or night can last more than 24h). At the moment the model cannot calculate statistics for such records. As a workaround for polar nights or days you might need to generate a sequence of datetime to input into the main function and then calculate statistics manually for the period between the sunset and the subsequent sunrise, which can last multiple days.
+> 
+> If in doubt or if you are getting "Error in seq.int(0, to0 - from, by) : 'to' must be a finite number", use sunrise() and sunset() functions from the package suncalc on your data to check if you are using correct location.
+
 
 ---
 #### elevExtCoeff()
