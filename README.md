@@ -88,9 +88,9 @@ It will also conveniently plot predicted values as points and moon phase as line
 > [!NOTE]
 > While the fuction will calculate moonlight intensity values during the day (when sun is above the horizon), please be aware that generally speaking moonlight is insignificant when compared to sunlight.
 > 
-> You can use the variable **night** in the output to filter out nocturnal records only or use more nuanced approach to defining twlilight based on the "sunAltDegrees** column.
+> You can use the variable **night** in the output to filter out nocturnal records only or use more nuanced approach to defining twlilight based on the **sunAltDegrees** column.
 > 
-> Please refer to the paper to understand relative contribution of moonlight to the overall brightness depending on the position of the sun and consider that in your analysis.
+> Please refer to the paper to better understand relative contribution of moonlight to the overall brightness depending on the position of the sun and consider that in your analysis.
 ---
 #### calculateMoonlightStatistics()
 ```R
