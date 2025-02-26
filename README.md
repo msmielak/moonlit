@@ -86,8 +86,9 @@ Function returns a data frame with following columns:
 It will also conveniently plot predicted values as points and moon phase as line, allowing for quick visual comparison of the two measures.
 
 > [!NOTE]
-> Currently it assigns 0 when sun is above the horizon, even if the moon is visible. Normally, this is not a problem, becasue when sun is visible, moonlight is negligible in comparison.
-> If you want to calculate of moonlight intensity during the day it is not possible using this function and would require a custom approach.
+> While the fuction will calculate moonlight intensity values during the day (when sun is above the horizon), please be aware that generally speaking moonlight is insignificant when compared to sunlight
+> You can use the variable **night** in the output to filter out nocturnal records only or use more nuanced approach to defining twlilight based on the "sunAltDegrees** column.
+> Please refer to the paper to understand relative contribution of moonlight to the overall brightness depending on the position of the sun and consider that in your analysis.
 ---
 #### calculateMoonlightStatistics()
 ```R
