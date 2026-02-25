@@ -34,12 +34,9 @@ and time, based on the location, position of the moon and number of correction
 factors
 }
 \examples{
-\dontrun{
-lat <- 52.2297
-lon <- 21.0122
+lat  <- 52.2297
+lon  <- 21.0122
 date <- as.POSIXct("2023-06-15 22:00:00", tz = "Europe/Warsaw")
-result <- calculateMoonlightIntensity(lat, lon, date, 0.21)
-}
-
+result <- calculateMoonlightIntensity(lat, lon, date, e = 0.21)
 
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/meanMoonlightValues.R
 \name{calculateMoonlightStatistics}
 \alias{calculateMoonlightStatistics}
-\title{Title}
+\title{Calculate nightly moonlight statistics}
 \usage{
 calculateMoonlightStatistics(lat, lon, date, e, t, timezone)
 }
@@ -28,8 +28,27 @@ space, or followed by "s". Example: "15 mins", "3 hour" etc.}
 i.e. for Poland: "Europe/Warsaw"}
 }
 \value{
-output
+A data frame with one row per input record and the following columns:
+  \item{sunset}{Time of sunset for the night the record belongs to}
+  \item{sunrise}{Time of sunrise for the night the record belongs to}
+  \item{date}{Original date-time from the input}
+  \item{meanMoonlightIntensity}{Mean nightly moonlight illumination}
+  \item{maxMoonlightIntensity}{Maximum nightly moonlight illumination}
+  \item{minMoonlightIntensity}{Minimum nightly moonlight illumination}
+  \item{meanMoonPhase}{Mean nightly moon phase (fraction of disc illuminated)}
+  \item{maxMoonPhase}{Maximum nightly moon phase}
+  \item{minMoonPhase}{Minimum nightly moon phase}
 }
 \description{
-Title
+Calculate nightly moonlight statistics
+}
+\examples{
+\donttest{
+lat  <- 52.2297
+lon  <- 21.0122
+date <- as.POSIXct("2023-06-15 22:00:00", tz = "Europe/Warsaw")
+result <- calculateMoonlightStatistics(lat, lon, date, e = 0.21,
+                                       t = "30 mins",
+                                       timezone = "Europe/Warsaw")
+}
 }

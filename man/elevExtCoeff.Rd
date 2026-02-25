@@ -10,16 +10,16 @@ elevExtCoeff(elev)
 \item{elev}{elevation in meters asl}
 }
 \value{
-elevExtCoeff
+A single numeric value: the estimated extinction coefficient for the
+  given elevation.
 }
 \description{
 Calculate extinction coefficient based on elevation of the observer
 }
 \examples{
-\dontrun{
+# Extinction coefficient at sea level
+suppressWarnings(elevExtCoeff(0))
 
-elev <- 2228 # Elevation in m asl for Mount Kosciuszko
-result <- elevExtCoeff(elev)
-}
-
+# Extinction coefficient at 1000 m asl (e.g. approximate for many study sites)
+suppressWarnings(elevExtCoeff(1000))
 }

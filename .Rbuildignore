@@ -1,2 +1,9 @@
 ^moonlit\.Rproj$
 ^\.Rproj\.user$
+^\.git$
+^\.gitignore$
+^\.claude$
+^LICENSE\.md$
+^cran-comments\.md$
+^README\.Rmd$
+^README\.md$

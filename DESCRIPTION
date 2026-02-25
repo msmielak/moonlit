@@ -1,35 +1,27 @@
 Package: moonlit
 Type: Package
-Title: Predicting moonlight intensity for given time and location
+Title: Predicting Moonlight Intensity for a Given Time and Location
 Version: 0.1.0
-Date: 2024-09-26
-Authors@R: 
-    person("Michal", "Smielak", 
+Authors@R:
+    person("Michal", "Smielak",
            email = "michalsmielak@gmail.com",
            role = c("aut", "cre"),
-           comment = c(ORCID = 0000-0002-3585-9945))
-Maintainer: Michal Smielak <michalsmielak@gmail.com>
-Description: Tools for predicting moonlight intensity on the ground based on 
-    the position of the moon, atmospheric conditions, and other factors. 
-    This package provides functions to calculate moonlight intensity and 
-    related statistics for ecological and behavioral research, offering more 
-    accurate estimates than simple moon phase calculations.
-    Comprehensive description of the model, validation of the model output
-    and a case study can be found in a peer-reviewed paper:
-    Śmielak, M.K. Biologically meaningful moonlight measures and their application in ecological research. Behav Ecol Sociobiol 77, 21 (2023). https://doi.org/10.1007/s00265-022-03287-2
-License: GPL-3 + file LICENSE
+           comment = c(ORCID = "0000-0002-3585-9945"))
+Description: Tools for predicting moonlight intensity on the ground based on
+    the position of the moon, atmospheric conditions, and other factors.
+    Provides functions to calculate moonlight intensity and related statistics
+    for ecological and behavioral research, offering more accurate estimates
+    than simple moon phase calculations. The underlying model is described in
+    Smielak (2023) <doi:10.1007/s00265-022-03287-2>.
+License: GPL-3
 Encoding: UTF-8
-LazyData: true
-RoxygenNote: 7.3.1
-Depends: 
-    R (>= 3.4.2)
-Imports: 
-    graphics,
-    stats,
-    openair,
+RoxygenNote: 7.3.2
+Depends:
+    R (>= 3.5.0)
+Imports:
     suncalc,
     lubridate
-Suggests: 
+Suggests:
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 URL: https://github.com/msmielak/moonlit
