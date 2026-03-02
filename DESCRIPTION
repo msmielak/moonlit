@@ -1,7 +1,7 @@
 Package: moonlit
 Type: Package
 Title: Predicting Moonlight Intensity for a Given Time and Location
-Version: 0.1.0
+Version: 0.1.1
 Authors@R:
     person("Michal", "Smielak",
            email = "michalsmielak@gmail.com",
