@@ -39,18 +39,17 @@ If you use `moonlit` package in your research, please cite:
 
 ## Using the moonlit library
 ### Installing
-To install from github you need devtool package
+The stable version can be installed from CRAN:
 
-```R
-#install and load devtools
-install.packages("devtools")
-library(devtools)
+```r
+install.packages("moonlit")
+```
 
-#install moonlit library from github repo
-install_github("msmielak/moonlit")
+The development version can be installed from GitHub:
 
-#load the moonlit library
-library(moonlit)
+```r
+install.packages("devtools") #you need devtools to install from GitHub
+devtools::install_github("msmielak/moonlit")
 ```
 
 ### Functions
